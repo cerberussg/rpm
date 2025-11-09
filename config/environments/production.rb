@@ -47,7 +47,7 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # Use memory cache store (simple blog doesn't need persistent cache)
-  config.cache_store = :memory_store
+  # config.cache_store = :memory_store
 
   # Use Solid Queue for background jobs (emails, etc.)
   config.active_job.queue_adapter = :solid_queue
