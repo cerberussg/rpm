@@ -1,0 +1,30 @@
+<div class="profile-container">
+  <h1>My Profile</h1>
+
+  <div class="profile-info">
+    <div class="info-group">
+      <label>Email:</label>
+      <p><%= @user.email_address %></p>
+    </div>
+
+    <div class="info-group">
+      <label>Account Type:</label>
+      <p><%= @user.admin? ? "Administrator" : "Regular User" %></p>
+    </div>
+
+    <div class="info-group">
+      <label>Member Since:</label>
+      <p><%= @user.created_at.strftime("%B %d, %Y") %></p>
+    </div>
+
+    <div class="info-group">
+      <label>Posts:</label>
+      <p><%= pluralize(@user.posts.count, "post") %></p>
+    </div>
+
+    <div class="info-group">
+      <label>Comments:</label>
+      <p><%= pluralize(@user.comments.count, "comment") %></p>
+    </div>
+  </div>
+</div>

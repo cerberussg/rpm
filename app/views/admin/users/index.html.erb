@@ -1,0 +1,36 @@
+<div class="admin-posts">
+  <div class="header">
+    <h1>Manage Users</h1>
+  </div>
+
+  <% if @users.any? %>
+    <table class="posts-table">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Admin</th>
+          <th>Posts</th>
+          <th>Comments</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.email_address %></td>
+            <td>
+              <span class="status <%= user.admin? ? 'published' : 'draft' %>">
+                <%= user.admin? ? 'Yes' : 'No' %>
+              </span>
+            </td>
+            <td><%= user.posts.count %></td>
+            <td><%= user.comments.count %></td>
+            <td><%= user.created_at.strftime("%b %d, %Y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="empty-state">No users yet.</p>
+  <% end %>
+</div>

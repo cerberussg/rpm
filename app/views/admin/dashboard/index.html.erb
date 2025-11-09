@@ -1,0 +1,71 @@
+<div class="admin-dashboard">
+  <h1>Admin Dashboard</h1>
+
+  <div class="stat-cards">
+    <div class="stat-card">
+      <div class="stat-value"><%= @users_count %></div>
+      <div class="stat-label">Users</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value"><%= @posts_count %></div>
+      <div class="stat-label">Posts</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value"><%= @categories_count %></div>
+      <div class="stat-label">Categories</div>
+    </div>
+  </div>
+
+  <div class="dashboard-columns">
+    <div class="dashboard-column">
+      <h2>Top Commenters</h2>
+      <% if @top_commenters.any? %>
+        <ul class="dashboard-list">
+          <% @top_commenters.each do |user| %>
+            <li>
+              <span class="item-name"><%= user.email_address %></span>
+              <span class="item-count"><%= pluralize(user.comments_count, 'comment') %></span>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="empty-state">No users with comments yet.</p>
+      <% end %>
+      <%= link_to "View All Users →", admin_users_path, class: "column-link" %>
+    </div>
+
+    <div class="dashboard-column">
+      <h2>Recent Posts</h2>
+      <% if @recent_posts.any? %>
+        <ul class="dashboard-list">
+          <% @recent_posts.each do |post| %>
+            <li>
+              <span class="item-name"><%= truncate(post.title, length: 40) %></span>
+              <span class="item-meta"><%= post.created_at.strftime("%b %d") %></span>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="empty-state">No posts yet.</p>
+      <% end %>
+      <%= link_to "View All Posts →", admin_posts_path, class: "column-link" %>
+    </div>
+
+    <div class="dashboard-column">
+      <h2>Most Used Categories</h2>
+      <% if @top_categories.any? %>
+        <ul class="dashboard-list">
+          <% @top_categories.each do |category| %>
+            <li>
+              <span class="item-name"><%= category.name %></span>
+              <span class="item-count"><%= pluralize(category.posts_count, 'post') %></span>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="empty-state">No categories with posts yet.</p>
+      <% end %>
+      <%= link_to "View All Categories →", admin_categories_path, class: "column-link" %>
+    </div>
+  </div>
+</div>

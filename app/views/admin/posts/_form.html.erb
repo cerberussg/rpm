@@ -1,0 +1,50 @@
+<%= form_with model: [:admin, post], local: true do |f| %>
+  <% if post.errors.any? %>
+    <div class="errors">
+      <h3><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h3>
+      <ul>
+        <% post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control", placeholder: "Enter post title" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :slug, "URL Slug (leave blank to auto-generate)" %>
+    <%= f.text_field :slug, class: "form-control", placeholder: "my-post-slug" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :category_id, "Category" %>
+    <%= f.collection_select :category_id,
+        Category.all.order(:name),
+        :id,
+        :name,
+        { include_blank: "Select a category" },
+        { class: "form-control" } %>
+    <small style="color: #7f8c8d; display: block; margin-top: 0.25rem;">
+      <%= link_to "Manage categories", admin_categories_path, target: "_blank", style: "color: #000000;" %>
+    </small>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :content %>
+    <%= f.rich_text_area :content, placeholder: "Write your post content in markdown..." %>
+  </div>
+
+  <div class="form-group checkbox">
+    <%= f.check_box :published %>
+    <%= f.label :published, "Publish this post" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", admin_posts_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

@@ -1,0 +1,38 @@
+<div class="blog-header">
+  <h1>Ruby, Python, & More</h1>
+  <p>Various topics ranging from unified communication challenges solved, side project discussion or  a specific cause. Code or tech will most likely be involved.</p>
+</div>
+
+<% if Current.user&.admin? %>
+  <div class="admin-quick-actions">
+    <%= link_to new_admin_post_path, class: "btn btn-primary btn-icon-large", title: "New Post" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+      </svg>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="posts-grid">
+  <% if @posts.any? %>
+    <% @posts.each do |post| %>
+      <article class="post-card">
+        <div class="post-meta">
+          <span class="category"><%= post.category_name %></span>
+          <span class="date"><%= post.created_at.strftime("%B %d, %Y") %></span>
+        </div>
+        <h2><%= link_to post.title, post_path(post.slug) %></h2>
+        <div class="post-excerpt">
+          <%= post_excerpt(post, length: 200) %>
+        </div>
+        <div class="post-footer">
+          <%= link_to "Read more →", post_path(post.slug), class: "read-more" %>
+          <span class="comment-count"><%= pluralize(post.comments.count, "comment") %></span>
+        </div>
+      </article>
+    <% end %>
+  <% else %>
+    <p class="empty-state">No posts published yet. Check back soon!</p>
+  <% end %>
+</div>
