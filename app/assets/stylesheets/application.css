@@ -273,8 +273,6 @@ main.container {
   transition: transform 0.2s, box-shadow 0.2s;
   display: flex;
   flex-direction: column;
-  contain: layout style paint;
-  content-visibility: auto;
 }
 
 .post-card:hover {

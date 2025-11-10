@@ -1,5 +1,4 @@
 class Admin::CategoriesController < ApplicationController
-  layout "admin"
   before_action :require_admin
   before_action :set_category, only: [:edit, :update, :destroy]
 
