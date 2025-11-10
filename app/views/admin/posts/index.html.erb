@@ -14,7 +14,7 @@
       <thead>
         <tr>
           <th>Title</th>
-          <th>Category</th>
+          <th>Categories</th>
           <th>Status</th>
           <th>Created</th>
           <th>Actions</th>
@@ -24,7 +24,7 @@
         <% @posts.each do |post| %>
           <tr>
             <td><%= link_to post.title, post_path(post.slug), target: "_blank" %></td>
-            <td><%= post.category_name %></td>
+            <td><%= post.categories.map(&:name).join(", ") %></td>
             <td>
               <span class="status <%= post.published ? 'published' : 'draft' %>">
                 <%= post.published ? 'Published' : 'Draft' %>
