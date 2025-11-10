@@ -22,7 +22,11 @@
     <% @posts.each do |post| %>
       <article class="post-card">
         <div class="post-meta">
-          <span class="category"><%= post.category_name %></span>
+          <div class="categories">
+            <% post.categories.each do |category| %>
+              <span class="category"><%= category.name %></span>
+            <% end %>
+          </div>
           <span class="date"><%= post.created_at.strftime("%B %d, %Y") %></span>
         </div>
         <h2><%= link_to post.title, post_path(post.slug) %></h2>

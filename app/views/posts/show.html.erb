@@ -7,7 +7,11 @@
     <%= link_to "← Back to all posts", root_path, class: "back-link" %>
 
     <div class="post-meta">
-      <span class="category"><%= @post.category_name %></span>
+      <div class="categories">
+        <% @post.categories.each do |category| %>
+          <span class="category"><%= category.name %></span>
+        <% end %>
+      </div>
       <span class="date"><%= @post.created_at.strftime("%B %d, %Y") %></span>
       <span class="author">by Scott Goyette</span>
     </div>

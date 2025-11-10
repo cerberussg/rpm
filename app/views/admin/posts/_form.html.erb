@@ -21,15 +21,15 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :category_id, "Category" %>
-    <%= f.collection_select :category_id,
+    <%= f.label :category_ids, "Categories (select up to 4)" %>
+    <%= f.collection_select :category_ids,
         Category.all.order(:name),
         :id,
         :name,
-        { include_blank: "Select a category" },
-        { class: "form-control" } %>
+        {},
+        { multiple: true, class: "form-control", size: 8 } %>
     <small style="color: #7f8c8d; display: block; margin-top: 0.25rem;">
-      <%= link_to "Manage categories", admin_categories_path, target: "_blank", style: "color: #000000;" %>
+      Hold Ctrl (Windows) or Cmd (Mac) to select multiple categories. Maximum 4 categories per post. <%= link_to "Manage categories", admin_categories_path, target: "_blank", style: "color: #000000;" %>
     </small>
   </div>
 
