@@ -12,12 +12,14 @@
 html {
   overflow-x: hidden;
   width: 100%;
+  position: relative;
 }
 
 body {
   overflow-x: hidden;
   width: 100%;
   max-width: 100vw;
+  position: relative;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   line-height: 1.6;
   color: #333;
@@ -39,6 +41,8 @@ section,
 article,
 div {
   max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 a {
@@ -68,7 +72,7 @@ a:hover {
   align-items: center;
   width: 100%;
   max-width: 100%;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .navbar .logo {
@@ -85,6 +89,8 @@ a:hover {
 
 .navbar .logo svg {
   display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 .nav-links {
@@ -375,6 +381,17 @@ main.container {
   margin-top: 2rem;
   font-size: 1.1rem;
   line-height: 1.8;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+.post-content pre,
+.post-content code {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 /* Comments */
@@ -1087,10 +1104,17 @@ main.container {
 
   .navbar .logo {
     font-size: 1rem;
+    max-width: 100px;
+  }
+
+  .navbar .logo svg {
+    width: 100px;
+    max-width: 100%;
   }
 
   .nav-links {
     gap: 0.5rem;
+    flex-shrink: 0;
   }
 
   /* Make sign up/sign in buttons smaller on mobile */
