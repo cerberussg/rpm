@@ -595,7 +595,19 @@ main.container {
   width: auto;
 }
 
-/* Tom Select dropdown fix */
+/* Tom Select styling */
+.ts-wrapper .ts-control {
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+  padding: 0.75rem !important;
+  min-height: 44px !important;
+}
+
+.ts-wrapper.focus .ts-control {
+  border-color: #000000 !important;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1) !important;
+}
+
 .ts-dropdown {
   z-index: 10000 !important;
   background: white !important;
