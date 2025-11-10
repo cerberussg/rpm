@@ -14,7 +14,7 @@ class Admin::DashboardController < ApplicationController
                           .limit(10)
 
     # 10 most recent posts
-    @recent_posts = Post.includes(:user, :category)
+    @recent_posts = Post.includes(:user, :categories)
                         .order(created_at: :desc)
                         .limit(10)
 
