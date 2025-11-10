@@ -595,9 +595,12 @@ main.container {
   width: auto;
 }
 
-/* Tom Select z-index fix */
+/* Tom Select dropdown fix */
 .ts-dropdown {
   z-index: 10000 !important;
+  background: white !important;
+  border: 1px solid #ddd !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
 }
 
 .form-actions {
