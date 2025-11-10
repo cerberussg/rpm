@@ -1,3 +1,7 @@
+<% content_for :title, "#{@post.title} - Ruby, Python & More" %>
+<% content_for :meta_description, truncate(strip_tags(@post.content.to_s), length: 155, separator: ' ') %>
+<% content_for :canonical_url, post_url(@post.slug, trailing_slash: false) %>
+
 <article class="post-detail">
   <div class="post-header">
     <%= link_to "← Back to all posts", root_path, class: "back-link" %>

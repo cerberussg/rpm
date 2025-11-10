@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Ruby Python & More" %></title>
+    <title><%= content_for(:title) || "Ruby, Python & More - Unified Communications Blog" %></title>
+    <meta name="description" content="<%= content_for(:meta_description) || "Explore unified communications topics, automation solutions, and technical insights covering Microsoft Teams Rooms, Cisco Control Hub, Ruby, Python and more." %>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Uc Blog">
+    <meta name="application-name" content="Ruby Python & More">
     <meta name="mobile-web-app-capable" content="yes">
+
+    <%# Canonical URL to handle trailing slashes and www/non-www %>
+    <link rel="canonical" href="<%= content_for(:canonical_url) || request.original_url.chomp('/') %>">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
