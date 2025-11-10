@@ -595,6 +595,11 @@ main.container {
   width: auto;
 }
 
+/* Tom Select z-index fix */
+.ts-dropdown {
+  z-index: 10000 !important;
+}
+
 .form-actions {
   display: flex;
   gap: 1rem;
