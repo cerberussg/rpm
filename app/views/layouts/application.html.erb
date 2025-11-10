@@ -26,11 +26,10 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.min.css">
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body data-turbo-prefetch="true">
     <nav class="navbar">
       <div class="container">
         <%= link_to root_path, class: "logo" do %>

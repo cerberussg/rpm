@@ -2,18 +2,20 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="dropdown"
 export default class extends Controller {
-  static targets = ["menu"]
-
   connect() {
     this.boundClose = this.close.bind(this)
   }
 
   toggle(event) {
     event.stopPropagation()
+    const isActive = this.element.classList.contains("active")
     this.element.classList.toggle("active")
 
-    if (this.element.classList.contains("active")) {
-      document.addEventListener("click", this.boundClose)
+    if (!isActive) {
+      // Use setTimeout to defer event listener attachment
+      setTimeout(() => {
+        document.addEventListener("click", this.boundClose, { passive: true, once: false })
+      }, 0)
     } else {
       document.removeEventListener("click", this.boundClose)
     }
