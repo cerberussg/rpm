@@ -1,4 +1,5 @@
 class Admin::PostsController < ApplicationController
+  layout "admin"
   before_action :require_admin
   before_action :set_post, only: [:edit, :update, :destroy]
 

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Admin - Ruby, Python & More" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="icon" href="/icon.png" type="image/png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.min.css">
+
+    <%# Load main application JS %>
+    <%= javascript_importmap_tags %>
+    <%# Load admin-specific JS (Trix/ActionText) %>
+    <%= javascript_import_module_tag "admin" %>
+  </head>
+
+  <body data-turbo-prefetch="true">
+    <nav class="navbar">
+      <div class="container">
+        <%= link_to root_path, class: "logo" do %>
+          <svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+            <!-- Speedometer gauge -->
+            <g transform="translate(20, 20)">
+              <!-- Outer circle -->
+              <circle cx="0" cy="0" r="15" fill="none" stroke="white" stroke-width="2"/>
+              <!-- Gauge arc (180 degrees) -->
+              <path d="M -15 0 A 15 15 0 0 1 15 0" fill="none" stroke="white" stroke-width="2"/>
+              <!-- Tick marks -->
+              <line x1="-15" y1="0" x2="-12" y2="0" stroke="white" stroke-width="2"/>
+              <line x1="-10.6" y1="-10.6" x2="-8.5" y2="-8.5" stroke="white" stroke-width="2"/>
+              <line x1="0" y1="-15" x2="0" y2="-12" stroke="white" stroke-width="2"/>
+              <line x1="10.6" y1="-10.6" x2="8.5" y2="-8.5" stroke="white" stroke-width="2"/>
+              <line x1="15" y1="0" x2="12" y2="0" stroke="white" stroke-width="2"/>
+              <!-- Needle pointing to high RPM -->
+              <line x1="0" y1="0" x2="9" y2="-9" stroke="#ff0000" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="0" cy="0" r="2" fill="#ff0000"/>
+            </g>
+
+            <!-- RPM text with speed lines -->
+            <g transform="translate(50, 25)">
+              <!-- Speed lines behind letters -->
+              <line x1="-5" y1="-8" x2="5" y2="-8" stroke="white" stroke-width="1.5" opacity="0.7"/>
+              <line x1="-3" y1="-3" x2="8" y2="-3" stroke="white" stroke-width="1.5" opacity="0.7"/>
+              <line x1="-5" y1="2" x2="5" y2="2" stroke="white" stroke-width="1.5" opacity="0.7"/>
+              <line x1="-3" y1="7" x2="8" y2="7" stroke="white" stroke-width="1.5" opacity="0.7"/>
+
+              <!-- RPM Letters -->
+              <text x="0" y="5" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white">RPM</text>
+            </g>
+          </svg>
+        <% end %>
+        <div class="nav-links">
+          <% if Current.user %>
+            <div class="user-dropdown" data-controller="dropdown">
+              <button class="user-menu-btn" data-action="click->dropdown#toggle" aria-label="User menu">
+                <svg class="user-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </button>
+              <div class="dropdown-menu">
+                <%= link_to profile_path, class: "dropdown-item" do %>
+                  <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  <span>Profile</span>
+                <% end %>
+                <% if Current.user.admin? %>
+                  <%= link_to admin_root_path, class: "dropdown-item" do %>
+                    <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                      <line x1="9" y1="3" x2="9" y2="21"></line>
+                    </svg>
+                    <span>Admin Dashboard</span>
+                  <% end %>
+                <% end %>
+                <%= button_to session_path, method: :delete, class: "dropdown-item sign-out" do %>
+                  <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                  </svg>
+                  <span>Sign Out</span>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container">
+      <% if flash[:notice] %>
+        <div class="alert alert-success"><%= flash[:notice] %></div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="alert alert-danger"><%= flash[:alert] %></div>
+      <% end %>
+
+      <%= yield %>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; <%= Date.current.year %> Ruby, Python & More. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
