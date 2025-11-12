@@ -12,7 +12,7 @@
           <span class="category"><%= category.name %></span>
         <% end %>
       </div>
-      <span class="date"><%= @post.created_at.strftime("%B %d, %Y") %></span>
+      <span class="date"><%= @post.display_date.strftime("%B %d, %Y") %></span>
       <span class="author">by Scott Goyette</span>
     </div>
 

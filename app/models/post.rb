@@ -9,9 +9,14 @@ class Post < ApplicationRecord
   validate :categories_limit
 
   before_validation :generate_slug
+  before_save :set_published_at
 
   scope :published, -> { where(published: true) }
-  scope :recent, -> { order(created_at: :desc) }
+  scope :recent, -> { order(published_at: :desc).order(created_at: :desc) }
+
+  def display_date
+    published_at || created_at
+  end
 
   private
 
@@ -24,6 +29,16 @@ class Post < ApplicationRecord
   def categories_limit
     if categories.size > 4
       errors.add(:categories, "cannot have more than 4 categories")
+    end
+  end
+
+  def set_published_at
+    # Set published_at when post is being published
+    if published? && published_at.nil?
+      self.published_at = Time.current
+    elsif !published?
+      # Clear published_at if unpublishing
+      self.published_at = nil
     end
   end
 end
